@@ -7,17 +7,9 @@ def plot_environment(world, zones, show_grid=True):
     from importlib import import_module
 
     # Matplotlib is an optional dependency; load it only when plotting.
-    try:
-        plt = import_module("matplotlib.pyplot")
-        ListedColormap = import_module("matplotlib.colors").ListedColormap
-        Patch = import_module("matplotlib.patches").Patch
-    except ModuleNotFoundError as exc:
-        if exc.name == "matplotlib" or (exc.name and exc.name.startswith("matplotlib.")):
-            raise ModuleNotFoundError(
-                "matplotlib is unavailable in this Python environment. "
-                "Install it with: python -m pip install matplotlib"
-            ) from exc
-        raise
+    plt = import_module("matplotlib.pyplot")
+    ListedColormap = import_module("matplotlib.colors").ListedColormap
+    Patch = import_module("matplotlib.patches").Patch
 
     # Numeric map: 0=buffer, 1=outer, 2=inner
     values = {
