@@ -1,4 +1,4 @@
-"""Static bounded grid. This module does not run a simulation."""
+"""Static bounded grid. This module tells the structure."""
 from enum import Enum
 from config import WORLD_WIDTH, WORLD_HEIGHT, BOUNDARY_BUFFER
 

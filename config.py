@@ -1,9 +1,9 @@
-"""Central configuration for UNKNOWN. Fill in None values before creating a World."""
+"""Central configuration for UNKNOWN."""
 
-WORLD_WIDTH = None
-WORLD_HEIGHT = None
-INNER_ZONE_RATIO = None
-BOUNDARY_BUFFER = None
+WORLD_WIDTH = 100
+WORLD_HEIGHT = 100
+INNER_ZONE_RATIO = 0.6
+BOUNDARY_BUFFER = 5
 
 # Visualization settings (optional; configure before plotting)
 SHOW_GRID_LINES = True
