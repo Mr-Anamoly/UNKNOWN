@@ -31,8 +31,8 @@ def plot_environment(world, zones, show_grid=True):
         ax.set_yticks(range(world.height), minor=True)
         ax.grid(which="minor", linewidth=0.2, alpha=0.35)
     ax.legend(handles=[
-        Patch(color="#76b7a5", label="Inner living zone"),
-        Patch(color="#e8c878", label="Outer ring"),
+        Patch(color="#79b683", label="Inner living zone"),
+        Patch(color="#d7d677", label="Outer ring"),
         Patch(color="#333333", label="Boundary buffer (inaccessible)"),
     ], loc="upper center", bbox_to_anchor=(0.5, -0.08), ncol=1)
     fig.tight_layout()

@@ -1,4 +1,4 @@
-"""Create and display the static UNKNOWN environment. No simulation is run."""
+"""Create and display the static UNKNOWN environment."""
 from config import SHOW_GRID_LINES
 from environment import World, ZoneMap
 from visualization import plot_environment
