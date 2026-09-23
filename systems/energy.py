@@ -1,7 +1,7 @@
-"""Energy intake rules for Milestone 2; no automatic feeding or metabolism."""
+"""Energy intake rules no automatic feeding or metabolism."""
 
-from organisms.organism import Organism
-from environment.resources import ResourcePatch, ResourceType
+from  organisms.organism import Organism
+from  environment.resources import ResourcePatch, ResourceType
 
 
 def intake_energy(
