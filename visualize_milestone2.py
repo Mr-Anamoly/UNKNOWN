@@ -1,5 +1,5 @@
 """UNKNOWN Milestone 2.1 visual preview. Run: python visualize_milestone2.py
-Keys: 1/2/3 select organism, g take energy, Q quit.
+Keys: 1/2/3 select organism, arrows move, g take energy, Q quit.
 """
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, Circle
@@ -8,16 +8,21 @@ try:
     from organisms.organism import Organism
     from environment.resources import ResourcePatch, ResourceType
     from systems.energy import intake_energy
+    from systems.movement import move_organism
+    from environment.world import World
 except ModuleNotFoundError:
     from UNKNOWN.organisms.organism import Organism # type: ignore
     from UNKNOWN.environment.resources import ResourcePatch, ResourceType # type: ignore
     from UNKNOWN.systems.energy import intake_energy # type: ignore
+    from UNKNOWN.systems.movement import move_organism # type: ignore
+    from UNKNOWN.environment.world import World # type: ignore
 
 WORLD_WIDTH = 100
 WORLD_HEIGHT = 100
 BUFFER = 5
 INNER_RATIO = 0.60
 MAX_INTAKE = 20.0
+world = World(WORLD_WIDTH, WORLD_HEIGHT, BUFFER)
 
 usable_w, usable_h = WORLD_WIDTH - 2*BUFFER, WORLD_HEIGHT - 2*BUFFER
 inner_w, inner_h = usable_w*INNER_RATIO, usable_h*INNER_RATIO
@@ -64,7 +69,7 @@ def draw():
         ax.annotate(f"O{o.organism_id}  E:{o.energy:.0f}",(x,y),
                     xytext=(8,-20),textcoords="offset points",fontsize=9)
     ax.set_title(f"UNKNOWN Milestone 2.1 — O{organisms[selected].organism_id} selected\n"
-                 "Press 1/2/3 to select • g = intake energy • Q = quit")
+                 "1/2/3 select • arrows move • g intake energy • Q quit")
     ax.legend(loc="upper right")
     fig.tight_layout(); fig.canvas.draw_idle()
 
@@ -72,6 +77,10 @@ def on_key(event):
     global selected
     if event.key in ("1","2","3"):
         selected=int(event.key)-1
+    elif event.key in ("up", "down", "left", "right"):
+        o = organisms[selected]
+        moved = move_organism(o, world, event.key)
+        print(f"O{o.organism_id}: {'moved to ' + str(o.position) if moved else 'movement blocked'}")
     elif event.key and event.key.lower()=="g":
         o,p=organisms[selected],resources[selected]
         gained=intake_energy(o,p,MAX_INTAKE,MAX_INTAKE)
@@ -82,5 +91,5 @@ def on_key(event):
 
 fig.canvas.mpl_connect("key_press_event",on_key)
 draw()
-print("Preview open: press 1/2/3 to select, g to take energy, Q to quit.")
+print("Preview open: 1/2/3 select, arrow keys move, g take energy, Q quit.")
 plt.show()
